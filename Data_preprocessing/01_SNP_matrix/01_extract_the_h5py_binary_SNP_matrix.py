@@ -5,6 +5,10 @@ f = h5py.File('1001_SNP_MATRIX/imputed_snps_binary.hdf5','r')
 df = pd.DataFrame(f['snps'][:])
 df.columns = f['accessions']
 pos = pd.Series([])
+# Get all SNP positions for all chromosomes (len=10709949)
+positions = f['positions'][:]
+# Array of tupels with start/stop indices for each chromosome
+chr_regions = f['positions'].attrs['chr_regions']
 for i in range(0,5):
 	chr = chr_regions[i]
 	position_chr = positions[chr[0]:chr[1]]
